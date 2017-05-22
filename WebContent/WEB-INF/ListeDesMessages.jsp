@@ -25,10 +25,6 @@ for ( Message message : messages){
 		<%	out.println(message.getStatus()); %>
 		<p><% out.println(message.getContent()); %></p>
 		<%if(message.getAuthor().getId().equals(request.getSession().getAttribute("idUser"))){ %>
-		<form action="SuppressionMessage" method="post">
-		<input type="submit" value="Suppression">
-		<input type='hidden' name='id' value='<%message.getId(); %>'>
-		</form>
 		<%} %>
 <% }%>
 </body>

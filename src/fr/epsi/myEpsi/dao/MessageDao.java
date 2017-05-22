@@ -22,7 +22,7 @@ public class MessageDao implements IMessageDao {
 		if(con != null){
 			try {
 				Statement stmt = con.createStatement();
-				ResultSet result=stmt.executeQuery("SELECT * FROM MESSAGES");
+				ResultSet result=stmt.executeQuery("SELECT * FROM MESSAGES WHERE USER_ID = '"+ user.getId() + "' OR STATUS = 0");
 				while (result.next()){
 					Message message = new Message();
 					message.setId(Long.valueOf(result.getInt(1)));
