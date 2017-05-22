@@ -10,23 +10,25 @@ import java.util.List;
 import fr.epsi.myEpsi.beans.Message;
 import fr.epsi.myEpsi.beans.Status;
 import fr.epsi.myEpsi.beans.User;
+import fr.epsi.myEpsi.service.UserService;
 
 public class MessageDao implements IMessageDao {
 
 	static Connection con = ConnectionTool.getConnection();
 	@Override
 	public List<Message> getListOfMessages(User user) {
+		UserService US = new UserService();
 		List<Message> messages = new ArrayList<>();
 		if(con != null){
 			try {
 				Statement stmt = con.createStatement();
-				ResultSet result=stmt.executeQuery("SELECT * FROM MESSAGES WHERE USER_ID=" + user.getId());
+				ResultSet result=stmt.executeQuery("SELECT * FROM MESSAGES");
 				while (result.next()){
 					Message message = new Message();
 					message.setId(Long.valueOf(result.getInt(1)));
 					message.setTitle(result.getString(2));
 					message.setContent(result.getString(3));
-					message.setAuthor(user);
+					message.setAuthor(US.getUserById(result.getString(4)));
 					message.setCreationDate(result.getTimestamp(5));
 					message.setUpdateDate(result.getTimestamp(6));
 					message.setStatus(Status.values()[result.getInt(7)]);
@@ -74,7 +76,7 @@ public class MessageDao implements IMessageDao {
 		if(con != null){
 			try{
 				Statement stmt = con.createStatement();
-				stmt.executeQuery("INSERT INTO MESSAGES VALUES (" + message.getTitle() + "," + message.getContent() + "," + message.getAuthor().getId() + "," + message.getCreationDate() + "," + null + "," + message.getStatus() + ")" );
+				stmt.executeQuery("INSERT INTO MESSAGES VALUES (" +message.getId() + ",'"+ message.getTitle() + "','" + message.getContent() + "','" + message.getAuthor().getId() + "','" + message.getCreationDate() + "','" + message.getCreationDate() + "'," + message.getStatus().ordinal() + ")" );
 			}
 			catch (SQLException e){
 				e.printStackTrace();
@@ -128,6 +130,23 @@ public class MessageDao implements IMessageDao {
 		}
 		else
 			return nbrMessage;
+		
+	}
+	
+	public static int nextId(){
+		int id = 0;
+		if(con != null){
+			try{
+				Statement stmt = con.createStatement();
+				ResultSet result=stmt.executeQuery("SELECT max(ID) FROM MESSAGES");
+				while(result.next())
+					id = result.getInt(1);
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return id+1;
 		
 	}
 

@@ -9,4 +9,44 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>fr.epsi.myEpsi.servlet.Inscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Connexion</servlet-name>
+    <servlet-class>fr.epsi.myEpsi.servlet.ConnexionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Connexion</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListeMessages</servlet-name>
+    <servlet-class>fr.epsi.myEpsi.servlet.ListeDeMessages</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeMessages</servlet-name>
+    <url-pattern>/listemessages</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListeUtilisateurs</servlet-name>
+    <servlet-class>fr.epsi.myEpsi.servlet.ListeDesUtilisateurs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeUtilisateurs</servlet-name>
+    <url-pattern>/listedesutilisateurs</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NewMessage</servlet-name>
+    <servlet-class>fr.epsi.myEpsi.servlet.NewMessage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewMessage</servlet-name>
+    <url-pattern>/newmessage</url-pattern>
+  </servlet-mapping>
 </web-app>

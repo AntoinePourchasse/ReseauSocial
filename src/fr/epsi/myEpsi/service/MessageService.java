@@ -44,5 +44,9 @@ public class MessageService implements IMessageService {
 		// TODO Auto-generated method stub
 		messageDao.deleteMessage(message);
 	}
+	
+	public int nextId(){
+		return messageDao.nextId();
+	}
 
 }

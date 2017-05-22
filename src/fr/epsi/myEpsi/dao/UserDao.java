@@ -45,7 +45,7 @@ public class UserDao implements IUserDao {
 		if(con != null){
 			try{
 				Statement stmt = con.createStatement();
-				ResultSet result = stmt.executeQuery("SELECT * FROM USERS WHERE ID = " + id);
+				ResultSet result = stmt.executeQuery("SELECT * FROM USERS WHERE ID = '" + id + "'");
 				while (result.next()){
 					user.setId(result.getString(1));
 					user.setPassword(result.getString(2));
@@ -67,7 +67,7 @@ public class UserDao implements IUserDao {
 		if(con != null){
 			try{
 				Statement stmt = con.createStatement();
-				stmt.executeQuery("INSERT INTO USERS VALUES (" + user.getId() + "," + user.getPassword() + ", false)");
+				stmt.executeQuery("INSERT INTO USERS(ID,PASSWORD,ISADMINISTRATOR) VALUES ('" + user.getId() + "','" + user.getPassword() + "', false)");
 			}
 			catch (SQLException e){
 				e.printStackTrace();
